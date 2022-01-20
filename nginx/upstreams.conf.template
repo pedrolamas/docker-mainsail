@@ -1,4 +1,4 @@
 upstream api-upstream {
   ip_hash;
-  server api:7125;
+  server ${API_HOST}:7125;
 }

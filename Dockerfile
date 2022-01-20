@@ -1,6 +1,7 @@
 FROM nginx:alpine
 
-COPY /mainsail/dist /usr/share/nginx/html
-COPY /nginx /etc/nginx/conf.d
+ENV PORT=80 \
+    API_HOST=127.0.0.1
 
-EXPOSE 80
+COPY /mainsail/dist /usr/share/nginx/html
+COPY /nginx /etc/nginx/templates

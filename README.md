@@ -11,10 +11,22 @@ Simple Docker image running a latest "develop" branch of [Mainsail](https://gith
 
 ## Usage
 
-When launched, you will need to specify the IP/host of the Moonraker server:
+Run the container normally, but remember to specify the `API_HOST` environment variable to indicate the Moonraker host.
 
 ```sh
-docker run -d --add-host api:<moonraker-ip> ei99070/docker-mainsail
+docker run -d -e API_HOST=<moonraker host or ip> ei99070/docker-mainsail
+```
+
+If the Moonraker host is not accessible from inside the default bridge network, you will need to run the container under the host network instead:
+
+```sh
+docker run -d -e API_HOST=<moonraker host or ip> --network=host ei99070/docker-mainsail
+```
+
+By default the server runs on port 80, but this can be changed by specifying the `PORT` environment variable.
+
+```sh
+docker run -d -e API_HOST=<moonraker host or ip> -e PORT=<alternative port> ei99070/docker-mainsail
 ```
 
 ## License
