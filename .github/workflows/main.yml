@@ -10,16 +10,23 @@ jobs:
   build:
     name: Build and deploy
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - branch: master
+            label: latest
+          - branch: develop
+            label: latest-dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Clone latest Mainsail code
+      - name: Clone Mainsail ${{ matrix.branch }} branch
         run: |
           git config --global user.name 'username'
           git config --global user.email 'username@users.noreply.github.com'
 
-          git clone --depth 1 https://github.com/mainsail-crew/mainsail
+          git clone -b ${{ matrix.branch }} --depth 1 https://github.com/mainsail-crew/mainsail
 
       - name: Build Mainsail code
         id: build
@@ -52,5 +59,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
           push: true
           tags: |
-            ei99070/docker-mainsail:latest-dev
+            ei99070/docker-mainsail:${{ matrix.label }}
             ei99070/docker-mainsail:${{ steps.build.outputs.mailsail_sha }}
