@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Mainsail
+    url: https://github.com/mainsail-crew/mainsail
+    about: The Mainsail GitHub repository
+  - name: Twitter contact
+    url: https://twitter.com/pedrolamas
+    about: Quickest way to get in contact

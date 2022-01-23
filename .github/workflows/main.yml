@@ -1,7 +1,6 @@
 name: Release
 
 on:
-  push:
   schedule:
     - cron: "*/20 * * * *"
   workflow_dispatch:
