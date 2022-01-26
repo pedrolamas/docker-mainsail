@@ -28,16 +28,16 @@ jobs:
 
           git clone -b ${{ matrix.branch }} --depth 1 https://github.com/mainsail-crew/mainsail
 
-          MAILSAIL_SHA=$(git -C mainsail rev-parse HEAD)
+          MAINSAIL_SHA=$(git -C mainsail rev-parse HEAD)
 
-          echo ::set-output name=mailsail_sha::${MAILSAIL_SHA}
+          echo ::set-output name=mainsail_sha::${MAINSAIL_SHA}
 
       - name: Check if Docker image already exists
         id: check
         run: |
           BUILD_IMAGE=false
 
-          docker manifest inspect ghcr.io/${{ github.repository }}:sha-${{ steps.repo.outputs.mailsail_sha }} > /dev/null || BUILD_IMAGE=true
+          docker manifest inspect ghcr.io/${{ github.repository }}:sha-${{ steps.repo.outputs.mainsail_sha }} > /dev/null || BUILD_IMAGE=true
 
           echo ::set-output name=build_image::${BUILD_IMAGE}
 
@@ -65,7 +65,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.github_meta.outputs.repository_name }}
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=sha-${{ steps.repo.outputs.mailsail_sha }}
+            type=raw,value=sha-${{ steps.repo.outputs.mainsail_sha }}
             type=raw,value=${{ matrix.branch }}
             type=raw,value=${{ matrix.label }}
 
