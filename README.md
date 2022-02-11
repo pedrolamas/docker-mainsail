@@ -20,19 +20,22 @@ This repo will run a GitHub action every 20 minutes to check for new code on the
 Create and run the new container as you would normally do, but remember to specify the `API_HOST` environment variable to indicate the Moonraker host.
 
 ```sh
-docker run -d -e API_HOST=<moonraker host or ip> ei99070/docker-mainsail
-```
-
-If the Moonraker host is not accessible from inside the default Docker bridge network, you will need to run the container under the host network (or any other network) instead:
-
-```sh
-docker run -d -e API_HOST=<moonraker host or ip> --network=host ei99070/docker-mainsail
+docker run -d \
+  --name mainsail \
+  --net=host \
+  -e API_HOST=<moonraker host or ip> \
+  ei99070/docker-mainsail
 ```
 
 By default the server runs on port 80, but this can be changed by specifying the `PORT` environment variable.
 
 ```sh
-docker run -d -e API_HOST=<moonraker host or ip> -e PORT=<alternative port> ei99070/docker-mainsail
+docker run -d \
+  --name mainsail \
+  --net=host \
+  -e API_HOST=<moonraker host or ip> \
+  -e PORT=<alternative port> \
+  ei99070/docker-mainsail
 ```
 
 ## Available tags
