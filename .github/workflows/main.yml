@@ -51,7 +51,7 @@ jobs:
       - name: Install Mainsail dependencies
         if: ${{ steps.check.outputs.build_image == 'true' }}
         run: |
-          npm ci --ignore-scripts --no-optional
+          npm ci --ignore-scripts
         working-directory: ./mainsail
 
       - name: Build Mainsail
