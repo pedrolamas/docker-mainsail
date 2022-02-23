@@ -16,7 +16,7 @@ jobs:
             label: latest
           - branch: develop
             label: latest-dev
-    continue-on-error: true
+      fail-fast: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
