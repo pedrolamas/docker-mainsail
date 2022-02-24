@@ -13,7 +13,7 @@ Simple Docker image running the latest [Mainsail](https://github.com/mainsail-cr
 >
 > Mainsail related issues must be reported directly on the Mainsail official repo.
 
-This repo will run a GitHub action every 20 minutes to check for new code on the "master" and "develop" branches of the Mainsail repository, and creates a new Docker images if there are any modifications.
+This repo will run a GitHub action every 20 minutes to check for new code on the "master" and "develop" branches of the Mainsail repository, and creates new Docker images if there are any modifications.
 
 ## Usage
 
