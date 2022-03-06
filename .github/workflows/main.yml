@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "*/20 * * * *"
   workflow_dispatch:
+    inputs:
+      forceBuild:
+        description: "Force image build"
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build:
@@ -36,7 +42,7 @@ jobs:
       - name: Check if Docker image already exists
         id: check
         run: |
-          BUILD_IMAGE=false
+          BUILD_IMAGE=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.forceBuild == 'true' }}
 
           docker manifest inspect ghcr.io/${{ github.repository }}:sha-${{ steps.repo.outputs.mainsail_sha }} > /dev/null || BUILD_IMAGE=true
 
@@ -46,7 +52,7 @@ jobs:
         if: ${{ steps.check.outputs.build_image == 'true' }}
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Install Mainsail dependencies
         if: ${{ steps.check.outputs.build_image == 'true' }}
