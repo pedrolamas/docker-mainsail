@@ -58,13 +58,13 @@ jobs:
         if: ${{ steps.check.outputs.build_image == 'true' }}
         run: |
           npm ci
-        working-directory: ./mainsail
+        working-directory: mainsail
 
       - name: Build Mainsail
         if: ${{ steps.check.outputs.build_image == 'true' }}
         run: |
           npm run build
-        working-directory: ./mainsail
+        working-directory: mainsail
 
       - name: Prepare GitHub metadata
         if: ${{ steps.check.outputs.build_image == 'true' }}
