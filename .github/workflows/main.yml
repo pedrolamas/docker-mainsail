@@ -134,6 +134,7 @@ jobs:
           labels: ${{ steps.docker_meta.outputs.labels }}
 
       - name: Attest Docker Hub image
+        if: ${{ steps.check.outputs.build_image == 'true' }}
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.github_meta.outputs.repository_name }}
@@ -141,6 +142,7 @@ jobs:
           push-to-registry: true
 
       - name: Attest Container Registry image
+        if: ${{ steps.check.outputs.build_image == 'true' }}
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ghcr.io/${{ github.repository }}
